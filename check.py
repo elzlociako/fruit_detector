@@ -9,7 +9,6 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 URL = 'https://wdpo.dpieczynski.pl'
 
-
 def main():
     student_id = 144614  # Tutaj należy wpisać swój numer indeksu
 
