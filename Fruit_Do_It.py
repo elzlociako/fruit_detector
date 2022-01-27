@@ -14,7 +14,7 @@ def main():
     banana_counter = 0
     apple_counter = 0
 
-    image = cv.imread('data/09.jpg')
+    image = cv.imread('data/02.jpg')
     
     with open('dnn_model/coco.names', 'r') as file:
         classes = file.read().splitlines()
