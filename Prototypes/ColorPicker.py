@@ -23,7 +23,7 @@ cv.createTrackbar("G_MAX", "HSV", 255, 255, empty)
 cv.createTrackbar("R_MAX", "HSV", 255, 255, empty)
 
 while True:
-    im =  cv.imread('/home/el_zlociako/Documents/WDPO_PROJ/data/01.jpg')
+    im =  cv.imread('/home/el_zlociako/Documents/WDPO_PROJ/data/02.jpg', 1)
 
     img = ScaleImage(im, 0.2)
 
@@ -45,26 +45,16 @@ while True:
     upper = np.array([255, 255, 255]) #39 255 255
     mask = cv.inRange(imgHSV, lower, upper)
 
-    kernel1 = np.ones((5,5),np.uint8)
-    kernel2 = np.ones((31,31),np.uint8)
-    dil = cv.dilate(mask,kernel1,iterations = 1)
-    closing = cv.morphologyEx(mask, cv.MORPH_CLOSE, kernel2)
-
-    dupa = dil + closing
-
-    result1 = cv.bitwise_and(img_b, img_b, mask=mask)
-    result2 = cv.bitwise_and(img_b, img_b, mask=dupa)
+    result = cv.bitwise_and(img_b, img_b, mask=mask)
     
     # imgray = cv.cvtColor(img_b, cv.COLOR_BGR2GRAY)
     # contours, hierarchy = cv.findContours(imgray, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
     # chuj = cv.drawContours(img, contours, -1, (0,255,0), 3)
 
-    cv.imshow('Original Image', img)
+    cv.imshow('Original Image', result)
     cv.imshow('HSV', imgHSV)
     cv.imshow('Color Mask', mask)
-    cv.imshow('Res1', result1)
-    cv.imshow('Res2', result2)
     # cv.imshow('Result AND', chuj)
 
 

@@ -35,8 +35,8 @@ def detect_fruits(img_path: str) -> Dict[str, int]:
     
     classIds, scores, boxes = model.detect(image, confThreshold=0.6, nmsThreshold=0.5)
     
-    for (classId, score, box) in zip(classIds, scores, boxes):
-        fruit_name = '%s' % np.array(classes)[classId]
+    for (classId, score, box) in zip(classIds.squeeze(), scores, boxes):
+        fruit_name = classes[classId]
 
         if fruit_name == "orange":
             cv.rectangle(image, (box[0], box[1]), (box[0] + box[2], box[1] + box[3]),
@@ -70,7 +70,7 @@ def detect_fruits(img_path: str) -> Dict[str, int]:
     # cv.putText(out_image, ("Apples: " + apple_str ), (out_image.shape[1]-100, 40), cv.FONT_HERSHEY_SIMPLEX, 0.5,
     #                 color=(0, 0, 0), thickness=1)
     # cv.putText(out_image, ("Oranges: " + orange_str ), (out_image.shape[1]-100, 60), cv.FONT_HERSHEY_SIMPLEX, 0.5,
-    #                 color=(0, 0, 0), thickness=1)
+    # #                 color=(0, 0, 0), thickness=1)
 
     # cv.imshow('Fruits Recognison', out_image)
 

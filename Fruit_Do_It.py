@@ -14,7 +14,7 @@ def main():
     banana_counter = 0
     apple_counter = 0
 
-    image = cv.imread('data/02.jpg')
+    image = cv.imread('data/09.jpg')
     
     with open('dnn_model/coco.names', 'r') as file:
         classes = file.read().splitlines()
@@ -24,10 +24,10 @@ def main():
     model = cv.dnn_DetectionModel(net)
     model.setInputParams(scale=1 / 255, size=(416, 416), swapRB=True)
     
-    classIds, scores, boxes = model.detect(image, confThreshold=0.6, nmsThreshold=0.5)
+    classIds, scores, boxes = model.detect(image, confThreshold=0.5, nmsThreshold=0.3)
     
-    for (classId, score, box) in zip(classIds, scores, boxes):
-        fruit_name = '%s' % (classes[classId])
+    for (classId, score, box) in zip(classIds.squeeze(), scores, boxes):
+        fruit_name = classes[classId]
 
         if fruit_name == "orange":
             cv.rectangle(image, (box[0], box[1]), (box[0] + box[2], box[1] + box[3]),
