@@ -6,20 +6,6 @@ import click
 import cv2 as cv
 from tqdm import tqdm
 
-import requests
-
-weights_url = "https://www.dropbox.com/s/9id84h0vuofloa3/yolov4.weights?dl=1"
-config_url = "https://www.dropbox.com/s/sgoun2vm1ea1jgl/yolov4.cfg?dl=1"
-coco_url = "https://www.dropbox.com/s/jse8kxj0pbu47lk/coco.names?dl=1"
-
-weights = requests.get(weights_url, allow_redirects=True)
-config = requests.get(config_url, allow_redirects=True)
-coco = requests.get(coco_url, allow_redirects=True)
-
-open('yolov4.weights', 'wb').write(weights.content)
-open('yolov4.cfg', 'wb').write(config.content)
-open('coco.names', 'wb').write(coco.content)
-
 def ScaleImage(input_image, scale_val):
     width = int(input_image.shape[1] * scale_val)
     height = int(input_image.shape[0] * scale_val)
@@ -38,10 +24,10 @@ def detect_fruits(img_path: str) -> Dict[str, int]:
     banana_counter = 0
     apple_counter = 0
     
-    with open('coco.names', 'r') as file:
+    with open('dnn_model/coco.names', 'r') as file:
         classes = file.read().splitlines()
     
-    net = cv.dnn.readNetFromDarknet('yolov4.cfg', 'yolov4.weights')
+    net = cv.dnn.readNetFromDarknet('dnn_model/yolov4.cfg', 'dnn_model/yolov4.weights')
     
     model = cv.dnn_DetectionModel(net)
     model.setInputParams(scale=1 / 255, size=(416, 416), swapRB=True)
