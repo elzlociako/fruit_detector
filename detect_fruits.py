@@ -60,18 +60,23 @@ def detect_fruits(img_path: str) -> Dict[str, int]:
 
     out_image = ScaleImage(image, 0.3)
     
-    banana = str(banana_counter)
-    apple = str(apple_counter)
-    orange = str(orange_counter)
+    banana_str = str(banana_counter)
+    apple_str = str(apple_counter)
+    orange_str = str(orange_counter)
+
+    banana = banana_counter
+    apple = apple_counter
+    orange = orange_counter
     
-    cv.putText(out_image, ("Bananas: " + banana), (out_image.shape[1]-100, 20), cv.FONT_HERSHEY_SIMPLEX, 0.5,
+    cv.putText(out_image, ("Bananas: " + banana_str), (out_image.shape[1]-100, 20), cv.FONT_HERSHEY_SIMPLEX, 0.5,
                     color=(0, 0, 0), thickness=1)
-    cv.putText(out_image, ("Apples: " + apple), (out_image.shape[1]-100, 40), cv.FONT_HERSHEY_SIMPLEX, 0.5,
+    cv.putText(out_image, ("Apples: " + apple_str ), (out_image.shape[1]-100, 40), cv.FONT_HERSHEY_SIMPLEX, 0.5,
                     color=(0, 0, 0), thickness=1)
-    cv.putText(out_image, ("Oranges: " + orange), (out_image.shape[1]-100, 60), cv.FONT_HERSHEY_SIMPLEX, 0.5,
+    cv.putText(out_image, ("Oranges: " + orange_str ), (out_image.shape[1]-100, 60), cv.FONT_HERSHEY_SIMPLEX, 0.5,
                     color=(0, 0, 0), thickness=1)
 
     # cv.imshow('Fruits Recognison', out_image)
+
 
     return {'apple': apple, 'banana': banana, 'orange': orange}
 
