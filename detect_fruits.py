@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from typing import Dict
 
+import numpy as np
 import click
 import cv2 as cv
 from tqdm import tqdm
@@ -35,7 +36,7 @@ def detect_fruits(img_path: str) -> Dict[str, int]:
     classIds, scores, boxes = model.detect(image, confThreshold=0.6, nmsThreshold=0.5)
     
     for (classId, score, box) in zip(classIds, scores, boxes):
-        fruit_name = '%s' % (classes[classId])
+        fruit_name = '%s' % (np.array(classes[classId]))
 
         if fruit_name == "orange":
             cv.rectangle(image, (box[0], box[1]), (box[0] + box[2], box[1] + box[3]),
